@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Text;
 
 namespace ListardTest
 {
-    public class Listard<T>
+    public class Listard<T> : IEnumerable
     {
         /// <summary>
         /// Internal data array.
@@ -116,17 +117,31 @@ namespace ListardTest
         }
 
         /// <summary>
-        /// Returns the list as a human-readable string.
+        /// Gets the list as a human-readable string.
         /// </summary>
         /// <returns>The list as a human-readable string.</returns>
         public override string ToString()
         {
+            // Create a StringBuilder
             var sb = new StringBuilder();
 
+            // Add all elements to the builder
             foreach (var element in Data)
                 sb.Append(element + ", ");
 
+            // Trim the string and return it
             return sb.ToString().Trim(',', ' ');
         }
+
+        /// <summary>
+        /// Gets the Enumerator of the list.
+        /// </summary>
+        /// <returns>The Enumerator of the list.</returns>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            foreach (var element in Data)
+                yield return element;
+        }
+
     }
 }
