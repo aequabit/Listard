@@ -125,9 +125,9 @@ namespace ListardTest
             // Create a StringBuilder
             var sb = new StringBuilder();
 
-            // Add all elements to the builder
+            // Add the string representation of all elements to the builder
             foreach (var element in Data)
-                sb.Append(element + ", ");
+                sb.Append(element.ToString() + ", ");
 
             // Trim the string and return it
             return sb.ToString().Trim(',', ' ');
@@ -142,6 +142,5 @@ namespace ListardTest
             foreach (var element in Data)
                 yield return element;
         }
-
     }
 }

@@ -1,10 +1,17 @@
 ﻿using System;
+using System.Linq;
 
 namespace ListardTest
 {
     class MainClass
     {
         public static void Main(string[] args)
+        {
+            Console.WriteLine("Listard<int>: {0}", IntList());
+            Console.WriteLine("Listard<Person>: {0}", PersonList());
+        }
+
+        static Listard<int> IntList()
         {
             // Create a Listard instance of type int
             Listard<int> list = new Listard<int>();
@@ -14,17 +21,30 @@ namespace ListardTest
             list.Add(1338);
             list.Add(1339);
 
-            // Get the element at index 0
-            list.ElementAt(0);
+            return list;
+        }
 
-            // Remove element at index 1
-            list.RemoveAt(1);
+        static Listard<Person> PersonList()
+        {
+            // Create a Listard instance of type int
+            Listard<Person> list = new Listard<Person>();
 
-            // Get the count of elements
-            int count = list.Count;
+            // Create persons
+            Person manfred;
+            manfred.Name = "Manfred";
+            manfred.Gender = Gender.Male;
+            manfred.DateOfBirth = new DateTime(1988, 04, 21);
 
-            // Get the list in a human-readable format
-            string str = list.ToString();
+            Person guenter;
+            guenter.Name = "Guenter";
+            guenter.Gender = Gender.Male;
+            guenter.DateOfBirth = new DateTime(1972, 07, 02);
+
+            // Add persons to the list
+            list.Add(manfred);
+            list.Add(guenter);
+
+            return list;
         }
     }
 }
