@@ -3,12 +3,12 @@ using System.Text;
 
 namespace ListardTest
 {
-    public class Listard
+    public class Listard<T>
     {
         /// <summary>
         /// Internal data array.
         /// </summary>
-        private int[] Data;
+        private T[] Data;
 
         /// <summary>
         /// Gets the amount of elements in the list.
@@ -24,14 +24,14 @@ namespace ListardTest
         /// </summary>
         public Listard()
         {
-            Data = new int[0];
+            Data = new T[0];
         }
 
         /// <summary>
         /// Adds one or more elements to the list.
         /// </summary>
         /// <param name="values">Elements to add.</param>
-        public void Add(params int[] values)
+        public void Add(params T[] values)
         {
             // Iterate over all values and add each to the list
             foreach (var value in values)
@@ -49,7 +49,7 @@ namespace ListardTest
         /// </summary>
         /// <param name="index">Index of the element to get.</param>
         /// <returns>The element at the given index.</returns>
-        public int ElementAt(int index)
+        public T ElementAt(int index)
         {
             // Throw an Exception the index is larger than the list
             if (index >= Data.Length)
@@ -86,9 +86,18 @@ namespace ListardTest
         /// </summary>
         /// <param name="value">Value to search for.</param>
         /// <returns>The index of the element, -1 if no element was found.</returns>
-        public int FindElement(int value)
+        public T FindElement(T value)
         {
-            throw new NotImplementedException("Listard->FindElement: Not implemented");
+            // Iterate over all elements
+            foreach (var element in Data)
+            {
+                // If the element is equal to the value, return it
+                if (element.Equals(value))
+                    return element;
+            }
+
+            // If no matching element was found, return a default instance of it (null)
+            return default(T);
         }
 
         /// <summary>
@@ -96,12 +105,13 @@ namespace ListardTest
         /// </summary>
         /// <param name="index">Index of the element to replace.</param>
         /// <param name="value">Value to replace the element with.</param>
-        public void Replace(int index, int value)
+        public void Replace(int index, T value)
         {
             // Throw an Exception the index is larger than the list
             if (index >= Data.Length)
                 throw new IndexOutOfRangeException("Index was outside the bounds of the list.");
 
+            // Replace the element
             Data[index] = value;
         }
 
