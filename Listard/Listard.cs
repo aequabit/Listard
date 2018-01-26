@@ -9,7 +9,7 @@ namespace ListardTest
         /// <summary>
         /// Internal data array.
         /// </summary>
-        private T[] Data;
+        T[] Data;
 
         /// <summary>
         /// Gets the amount of elements in the list.
@@ -27,6 +27,12 @@ namespace ListardTest
         {
             Data = new T[0];
         }
+
+        /// <summary>
+        /// Array operator overload.
+        /// </summary>
+        /// <param name="index">Index of the element to get.</param>
+        public T this[int index] => ElementAt(index);
 
         /// <summary>
         /// Adds one or more elements to the list.
