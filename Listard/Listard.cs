@@ -88,7 +88,16 @@ namespace ListardTest
         /// <returns>The index of the element, -1 if no element was found.</returns>
         public int FindElement(int value)
         {
-            throw new NotImplementedException("Listard->FindElement: Not implemented");
+            // Iterate over all elements
+            foreach (var element in Data)
+            {
+                // If the element is equal to the value, return it
+                if (element == value)
+                    return element;
+            }
+
+            // If no matching element was found, return a default instance of it (null)
+            return -1;
         }
 
         /// <summary>
