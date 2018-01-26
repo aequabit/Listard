@@ -85,7 +85,7 @@ namespace ListardTest
         /// Searches for an element by it's value.
         /// </summary>
         /// <param name="value">Value to search for.</param>
-        /// <returns>The index of the element, -1 if no element was found.</returns>
+        /// <returns>The index of the element, a default instance if no element was found.</returns>
         public T FindElement(T value)
         {
             // Iterate over all elements

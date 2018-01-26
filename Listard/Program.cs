@@ -6,8 +6,8 @@ namespace ListardTest
     {
         public static void Main(string[] args)
         {
-            // Create a Listard instance
-            Listard list = new Listard();
+            // Create a Listard instance of type int
+            Listard<int> list = new Listard<int>();
 
             // Add elements
             list.Add(1337);
