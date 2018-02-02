@@ -7,11 +7,7 @@ namespace ListardTest
     {
         public static void Main(string[] args)
         {
-            Listard<int> l = new Listard<int>();
-            l.Add(1, 2, 3, 4, 5, 0, 0, 0);
-            l.Insert(1, 99);
 
-            return;
             Console.WriteLine("Listard<int>: {0}", IntList());
             Console.WriteLine("Listard<Person>: {0}", PersonList());
         }
@@ -25,7 +21,6 @@ namespace ListardTest
             list.Add(1337);
             list.Add(1338);
             list.Add(1339);
-
 
             return list;
         }

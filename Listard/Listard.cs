@@ -78,27 +78,23 @@ namespace ListardTest
         /// </summary>
         /// <param name="index">Index to add the elements at.</param>
         /// <param name="values">Elements to add.</param>
-        // public void Insert(int index, params T[] values)
-        // {
-        //     // Iterate over all values and insert each one
-        //     foreach (var value in values)
-        //     {
-        //         // Throw an Exception the index is larger than the list
-        //         if (index > Data.Length)
-        //             throw new IndexOutOfRangeException("Index was outside the bounds of the list.");
+        public void Insert(int index, params T[] values)
+        {
+            // Throw an Exception the index is larger than the list
+            if (index > Data.Length)
+                throw new IndexOutOfRangeException("Index was outside the bounds of the list.");
 
-        //         // Increase the size of the array by one
-        //         Array.Resize(ref Data, Data.Length + values.Length);
+            // Increase the size of the array by one
+            Array.Resize(ref Data, Data.Length + values.Length);
 
-        //         // Iterate over all elements after the given index and move them forward by one
-        //         for (var i = Data.Length - 1; i > index; i--)
-        //             Data[i] = Data[i - values.Length - i];
+            // Iterate over all elements after the given index and move them forward by one
+            for (var i = Data.Length - 1; i > index; i--)
+                Data[i] = Data[i - values.Length];
 
-        //         // Set each value at the given index
-        //         for (var i = index; i < values.Length; i++)
-        //             Data[i] = values[i];
-        //     }
-        // }
+            // Set each value at the given index
+            for (var i = index; i < index + values.Length; i++)
+                Data[i] = values[i - index];
+        }
 
         /// <summary>
         /// Gets the element at the given index.
