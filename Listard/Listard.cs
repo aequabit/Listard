@@ -2,14 +2,14 @@
 using System.Collections;
 using System.Text;
 
-namespace ListardTest
+namespace Listard
 {
     public class Listard<T> : IEnumerable
     {
         /// <summary>
         /// Internal data array.
         /// </summary>
-        T[] Data;
+        T[] Data = new T[0];
 
         /// <summary>
         /// Gets the amount of elements in the list.
@@ -21,18 +21,14 @@ namespace ListardTest
         }
 
         /// <summary>
-        /// Initializes a new list.
-        /// </summary>
-        public Listard()
-        {
-            Data = new T[0];
-        }
-
-        /// <summary>
         /// Array operator overload.
         /// </summary>
         /// <param name="index">Index of the element to get.</param>
-        public T this[int index] => ElementAt(index);
+        public T this[int index]
+        {
+            get => ElementAt(index);
+            set => Replace(index, value);
+        }
 
         /// <summary>
         /// Adds one or more elements to the list.
@@ -40,37 +36,27 @@ namespace ListardTest
         /// <param name="values">Elements to add.</param>
         public void Add(params T[] values)
         {
-            // Iterate over all values and add each to the list
-            foreach (var value in values)
-            {
-                // Increase the size of the array by one
-                Array.Resize(ref Data, Data.Length + 1);
+            // Increase the size of the array by the length of the values
+            Array.Resize(ref Data, Data.Length + values.Length);
 
-                // Write the value to the last index
-                Data[Data.Length - 1] = value;
-            }
+            // Iterate over all values and add each to the list
+            for (var i = Data.Length - values.Length; i < Data.Length; i++)
+                Data[i] = values[i - (Data.Length - values.Length)]; // Write the value to the last index
         }
 
         /// <summary>
-        /// Inserts an element at the give index.
+        /// Checks if an element is in the list.
         /// </summary>
-        /// <param name="index">Index to add the element at.</param>
-        /// <param name="value">Element to add.</param>
-        public void Insert(int index, T value)
+        /// <param name="element">Element to check for.</param>
+        /// <returns>True if the element exists, false otherwise.</returns>
+        public bool Contains(T element)
         {
-            // Throw an Exception the index is larger than the list
-            if (index > Data.Length)
-                throw new IndexOutOfRangeException("Index was outside the bounds of the list.");
+            // Iterate over all elements
+            foreach (var e in Data)
+                if (e.Equals(element)) // Check if the element equals the current iteration
+                    return true;
 
-            // Increase the size of the array by one
-            Array.Resize(ref Data, Data.Length + 1);
-
-            // Iterate over all elements after the given index and move them forward by one
-            for (var i = Data.Length - 1; i > index; i--)
-                Data[i] = Data[i - 1];
-
-            // Set the value at the given index
-            Data[index] = value;
+            return false;
         }
 
         /// <summary>
@@ -148,7 +134,7 @@ namespace ListardTest
                     return element;
             }
 
-            // If no matching element was found, return a default instance of it (null)
+            // If no matching element was found, return null
             return default(T);
         }
 
@@ -190,7 +176,7 @@ namespace ListardTest
         /// <returns>The Enumerator of the list.</returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
-            foreach (var element in Data)
+            foreach (T element in Data)
                 yield return element;
         }
     }

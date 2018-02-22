@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace ListardTest
+namespace Listard
 {
     class MainClass
     {
@@ -18,9 +18,9 @@ namespace ListardTest
             Listard<int> list = new Listard<int>();
 
             // Add elements
-            list.Add(1337);
-            list.Add(1338);
-            list.Add(1339);
+            list.Add(1, 2, 3);
+            list.Add(4, 5, 6);
+            list.Add(7, 8, 9);
 
             return list;
         }
