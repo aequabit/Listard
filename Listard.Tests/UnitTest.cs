@@ -3,7 +3,7 @@
 namespace Listard.Tests
 {
     [TestFixture()]
-    public class Test
+    public class UnitTest
     {
         private Listard<int> _listard = new Listard<int>();
 
