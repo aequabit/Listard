@@ -7,7 +7,6 @@ namespace StupidUnitTest
     class Program
     {
         private static Listard<int> _listard = new Listard<int>();
-        private static bool _error = false;
 
         static void Main(string[] args)
         {
@@ -32,7 +31,7 @@ namespace StupidUnitTest
                 }
             }
 
-            if (!_error)
+            if (!TestFailException.Error)
             {
                 Console.WriteLine();
                 Console.WriteLine("=======================================");
@@ -52,22 +51,21 @@ namespace StupidUnitTest
 
             if (lenght2.Equals(lenght1))
             {
-                _error = true;
-                throw new Exception("Unit Test #1 failed.");
+                TestFailException.Throw("Unit Test #1 failed.");
             }
         }
 
         public static void TestInitialization()
         {
             if (_listard.Count != 0)
-                throw new Exception("Unit Test #2 failed.");
+                TestFailException.Throw("Unit Test #2 failed.");
         }
 
         public static void TestAddInt()
         {
             _listard.Add(1);
             if (_listard.Count == 0)
-                throw new Exception("Unit Test #3 failed.");
+                TestFailException.Throw("Unit Test #3 failed.");
         }
 
         public static void TestRemoveAt()
@@ -76,7 +74,7 @@ namespace StupidUnitTest
             test.RemoveAt(0);
 
             if (test.Count != 4)
-                throw new Exception("Unit Test #4 failed.");
+                TestFailException.Throw("Unit Test #4 failed.");
         }
 
         public static void TestContains()
@@ -84,7 +82,7 @@ namespace StupidUnitTest
             _listard.Add(100);
             if (!_listard.Contains(100))
             {
-                throw new Exception("Unit Test #5 failed.");
+                TestFailException.Throw("Unit Test #5 failed.");
             }
         }
 
@@ -92,7 +90,7 @@ namespace StupidUnitTest
         {
             if(_listard.FindElement(100) == default(int))
             {
-                throw new Exception("Unit Test #6 failed.");
+                TestFailException.Throw("Unit Test #6 failed.");
             }
         }
     }
