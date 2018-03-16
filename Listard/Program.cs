@@ -4,7 +4,7 @@ using ListardTest;
 
 namespace Listard
 {
-    class MainClass
+    internal class MainClass
     {
         public static void Main(string[] args)
         {
@@ -13,10 +13,10 @@ namespace Listard
             Console.WriteLine("Listard<Person>: {0}", PersonList());
         }
 
-        static Listard<int> IntList()
+        private static Listard<int> IntList()
         {
             // Create a Listard instance of type int
-            Listard<int> list = new Listard<int>();
+            var list = new Listard<int>();
 
             // Add elements
             list.Add(1, 2, 3);
@@ -26,10 +26,10 @@ namespace Listard
             return list;
         }
 
-        static Listard<Person> PersonList()
+        private static Listard<Person> PersonList()
         {
             // Create a Listard instance of type int
-            Listard<Person> list = new Listard<Person>();
+            var list = new Listard<Person>();
 
             // Create persons
             Person manfred;

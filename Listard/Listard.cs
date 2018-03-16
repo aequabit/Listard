@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Linq;
 using System.Text;
 
 namespace Listard
@@ -49,15 +50,7 @@ namespace Listard
         /// </summary>
         /// <param name="element">Element to check for.</param>
         /// <returns>True if the element exists, false otherwise.</returns>
-        public bool Contains(T element)
-        {
-            // Iterate over all elements
-            foreach (var e in Data)
-                if (e.Equals(element)) // Check if the element equals the current iteration
-                    return true;
-
-            return false;
-        }
+        public bool Contains(T element) => Data.Contains(element);
 
         /// <summary>
         /// Inserts one or more elements at the given index.
@@ -95,6 +88,18 @@ namespace Listard
 
             // Return the value at the given index
             return Data[index];
+        }
+
+        /// <summary>
+        /// Gets the last element in the list.
+        /// </summary>
+        /// <returns>The last element in the list.</returns>
+        public T Last()
+        {
+            if (Data.Length == 0)
+                throw new IndexOutOfRangeException("No element in the list.");
+
+            return Data[Data.Length - 1];
         }
 
         /// <summary>
@@ -174,10 +179,6 @@ namespace Listard
         /// Gets the Enumerator of the list.
         /// </summary>
         /// <returns>The Enumerator of the list.</returns>
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            foreach (T element in Data)
-                yield return element;
-        }
+        IEnumerator IEnumerable.GetEnumerator() => Data.GetEnumerator();
     }
 }
