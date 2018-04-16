@@ -11,16 +11,13 @@ namespace Listard
         /// <summary>
         /// Internal data array.
         /// </summary>
-        T[] _data = new T[0];
+        private T[] _data = new T[0];
 
         /// <summary>
         /// Gets the amount of elements in the list.
         /// </summary>
         /// <returns>The amount of elements in the list.</returns>
-        public int Count
-        {
-            get => _data.Length;
-        }
+        public int Count => _data.Length;
 
         /// <summary>
         /// Array operator overload.
@@ -178,7 +175,7 @@ namespace Listard
 
             // Add the string representation of all elements to the builder
             foreach (var element in _data)
-                sb.Append(element.ToString() + ", ");
+                sb.Append(element + ", ");
 
             // Trim the string and return it
             return sb.ToString().Trim(',', ' ');

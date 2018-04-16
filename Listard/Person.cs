@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Text;
 
 namespace ListardTest
 {
@@ -16,7 +14,7 @@ namespace ListardTest
         public Gender Gender;
         public DateTime DateOfBirth;
 
-        public string ToString()
+        public override string ToString()
         {
             return $"{Name}, {Gender}, {DateOfBirth:dd.MM.yyyy}";
         }
