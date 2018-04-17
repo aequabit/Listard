@@ -101,7 +101,28 @@ namespace Listard
         }
 
         /// <summary>
-        /// Removes one or more elements from the list.
+        /// Removes an element from the list.
+        /// </summary>
+        /// <param name="values">Items to remove.</param>
+        public void Remove(params T[] values)
+        {
+            // Iterate over all elements to remove
+            foreach (var value in values)
+            {
+                // Find the element in the
+                for (var i = 0; i < _data.Length; i++)
+                {
+                    // T doesn't overload the equality operator
+                    if (!EqualityComparer<T>.Default.Equals(value, _data[i])) continue;
+
+                    // Remove the element at the index
+                    RemoveAt(i);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Removes one or more elements at the given index from the list.
         /// </summary>
         /// <param name="indices">Indices of the items to remove.</param>
         public void RemoveAt(params int[] indices)
