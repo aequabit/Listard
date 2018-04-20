@@ -1,23 +1,16 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace Listard
 {
-    public class Listard<T> : IEnumerable<T>
+    public class Listard<T>
     {
         /// <summary>
         /// Internal data array.
         /// </summary>
         private T[] _data = new T[0];
-
-        /// <summary>
-        /// Gets the amount of elements in the list.
-        /// </summary>
-        /// <returns>The amount of elements in the list.</returns>
-        public int Count => _data.Length;
 
         /// <summary>
         /// Array operator overload.
@@ -42,13 +35,6 @@ namespace Listard
             for (var i = _data.Length - values.Length; i < _data.Length; i++)
                 _data[i] = values[i - (_data.Length - values.Length)]; // Write the value to the last index
         }
-
-        /// <summary>
-        /// Checks if an element is in the list.
-        /// </summary>
-        /// <param name="element">Element to check for.</param>
-        /// <returns>True if the element exists, false otherwise.</returns>
-        public bool Contains(T element) => _data.Contains(element);
 
         /// <summary>
         /// Inserts one or more elements at the given index.
@@ -86,6 +72,43 @@ namespace Listard
 
             // Return the value at the given index
             return _data[index];
+        }
+
+        public int Count()
+        {
+            return _data.Length;
+        }
+
+        public int Count(Func<T, bool> predicate)
+        {
+            return _data.Count(predicate);
+        }
+        
+        public bool Any()
+        {
+            return _data.Length > 0;
+        }
+
+        public bool Any(Func<T, bool> predicate)
+        {
+            return _data.Any(predicate);
+        }
+
+        public IEnumerable<T> Where(Func<T, bool> predicate)
+        {
+            return _data.Where(predicate);
+        }
+        
+        /// <summary>
+        /// Gets the first element in the list.
+        /// </summary>
+        /// <returns>The first element in the list.</returns>
+        public T First()
+        {
+            if (_data.Length == 0)
+                throw new IndexOutOfRangeException("No element in the list.");
+
+            return _data[0];
         }
 
         /// <summary>
@@ -141,6 +164,11 @@ namespace Listard
                 // Decrease the size of the array by one
                 Array.Resize(ref _data, _data.Length - 1);
             }
+        }
+
+        public void Where()
+        {
+            
         }
 
         /// <summary>
@@ -201,12 +229,6 @@ namespace Listard
             // Trim the string and return it
             return sb.ToString().Trim(',', ' ');
         }
-
-        /// <summary>
-        /// Gets the enumerator of the list.
-        /// </summary>
-        /// <returns>The enumerator of the list.</returns>
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         /// <summary>
         /// Gets the generic enumerator of the list.
